@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Flavor {
+  id: ID!
+  name: String!
+  coffees: [Coffee!]!
+}
+
+"""Coffee model"""
+type Coffee {
+  """A unique identifier"""
+  id: ID!
+  name: String!
+  brand: String!
+  flavors: [Flavor!]!
+  createdAt: Date
+}
+
+"""date custom scalar type"""
+scalar Date
+
+type Query {
+  coffees: [Coffee!]!
+  coffee(id: ID!): Coffee!
+}
+
+type Mutation {
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
+  updateCoffee(id: Float!, updateCoffeeInput: UpdateCoffeeInput!): Coffee!
+  removeCoffee(id: Float!): Coffee!
+}
+
+"""Create coffee input object type."""
+input CreateCoffeeInput {
+  """A new coffee name."""
+  name: String!
+  brand: String!
+  flavors: [String!]!
+}
+
+input UpdateCoffeeInput {
+  """A new coffee name."""
+  name: String
+  brand: String
+  flavors: [String!]
+}
