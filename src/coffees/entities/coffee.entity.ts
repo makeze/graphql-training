@@ -1,4 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { CoffeeType } from 'src/common/enums/coffee-type.enum';
+import { Drink } from 'src/common/interfaces/drink.interface';
 import {
   Column,
   CreateDateColumn,
@@ -11,7 +13,7 @@ import { Flavor } from './flavor.entity';
 
 @Entity()
 @ObjectType({ description: 'Coffee model' })
-export class Coffee {
+export class Coffee implements Drink {
   @PrimaryGeneratedColumn()
   @Field(() => ID, { description: 'A unique identifier' })
   id: number;
@@ -28,4 +30,7 @@ export class Coffee {
 
   @CreateDateColumn()
   createdAt?: Date;
+
+  @Column({ nullable: true })
+  type?: CoffeeType;
 }
