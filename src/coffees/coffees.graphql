@@ -1,10 +1,45 @@
-type Coffee {
+type Coffee implements Drink {
   id: ID!
+  name: String!
+  brand: String!
+  flavors: [Flavor!]
+}
+
+type Flavor {
+  id: ID!
+  name: String!
+}
+
+type Tea implements Drink {
+  name: String!
+}
+
+interface Drink {
+  name: String!
+}
+
+input CreateCoffeeInput {
   name: String!
   brand: String!
   flavors: [String!]!
 }
 
+input UpdateCoffeeInput {
+  name: String
+  brand: String
+  flavors: [String!]
+}
+
+union DrinksResult = Coffee | Tea
+
 type Query {
   coffees: [Coffee!]!
+  coffee(id: ID!): Coffee!
+  drinks: [DrinksResult!]!
+}
+
+type Mutation {
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee!
+  updateCoffee(id: ID!, updateCoffeeInput: UpdateCoffeeInput!): Coffee!
+  removeCoffee(id: ID!): Coffee!
 }

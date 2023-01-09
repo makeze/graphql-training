@@ -21,5 +21,14 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector:
+          'ImportDeclaration[source.value=/graphql-types/] > ImportSpecifier',
+        message:
+          'Named imports are not allowed for "graphql-types" imports. Use "import * as GraphQLTypes [...]" instead.',
+      },
+    ],
   },
 };
